@@ -54,6 +54,7 @@ HHKinFit2::HHKinFit::fit(){
   int methodbefore = 1;           //  initial fit method, see PSfit()
   int modebefore = 1;             //  mode =1 for start of a new fit by PSfit()
   
+  bool exceptionFound = false;
   for (unsigned int i=0; i<m_fitobjects.size(); i++){
     //// fill initial tau fit parameters
     //astart[i] = m_fitobjects[i]->getE();    // energy of first tau
@@ -93,39 +94,9 @@ HHKinFit2::HHKinFit::fit(){
       }
       catch(HHKinFit2::HHEnergyRangeException const& e){
         std::cout << e.what() << std::endl;
-
-        std::cout << "iloop =" << iloop << std::endl;
-        std::cout << "iter  ="<< iterbefore << " " << iter << std::endl;
-        std::cout << "method="<< methodbefore << " " << method << std::endl;
-        std::cout << "mode  ="<< modebefore << " " << mode << std::endl;
-        std::cout << "noNewtonShifts="<< noNewtonShifts << std::endl;
-        std::cout << "printlevel="<< m_printlevel << std::endl;
-        std::cout << "np="<< np << std::endl;
-        std::cout << "chi2="<< chi2before << " " << m_chi2 << std::endl;
-        std::cout << "chi2iter[0]="<< chi2iterbefore[0] << " " << chi2iter[0] << std::endl;
-
-        for (unsigned int i=0; i<m_fitobjects.size();i++) std::cout << "a[" << i << "]      ="<< abefore[i] << " " << a[i] << std::endl;
-        for (unsigned int i=0; i<m_fitobjects.size();i++) std::cout << "astart[" << i << "] ="<< astart[i] << std::endl;
-        for (unsigned int i=0; i<m_fitobjects.size();i++) std::cout << "aprec[" << i << "]  ="<< aprec[i] << std::endl;
-        for (unsigned int i=0; i<m_fitobjects.size();i++) std::cout << "daN[" << i << "]    ="<< daNbefore[i] << " " << daN[i] << std::endl;
-        for (unsigned int i=0; i<m_fitobjects.size();i++) std::cout << "h[" << i << "]      ="<< hbefore[i] << " " << h[i] << std::endl;
-        for (unsigned int i=0; i<m_fitobjects.size();i++) std::cout << "aMemory[" << i << "]="<< aMemorybefore[i][0] << " "
-            << aMemorybefore[i][1] << " "
-            << aMemorybefore[i][2] << " "
-            << aMemorybefore[i][3] << " "
-            << aMemorybefore[i][4] << std::endl;
-        for (unsigned int i=0; i<m_fitobjects.size();i++) std::cout << "after: aMemory[" << i << "]="<< aMemorybefore[i][0] << " "
-            << aMemory[i][1] << " "
-            << aMemory[i][2] << " "
-            << aMemory[i][3] << " "
-            << aMemory[i][4] << std::endl;
-        for (unsigned int i=0; i<m_fitobjects.size();i++) std::cout << "g[" << i << "]      =" << gbefore[i] << " " << g[i] << std::endl;
-        for (unsigned int i=0; i<m_fitobjects.size()*m_fitobjects.size();i++) std::cout << "H[" << i << "]      =" << Hbefore[i] << " " << H[i] << std::endl;
-        for (unsigned int i=0; i<m_fitobjects.size()*m_fitobjects.size();i++) std::cout << "Hinv[" << i << "]   =" << Hinvbefore[i] <<  " " << Hinv[i] <<std::endl;
         throw(e);
       }
     }
-    
     m_chi2=this->getChi2();
     //	    std::cout << iloop << " a[0]: " << a[0] << " chi2: " << std::fixed << std::setprecision(8) << chi2 << std::endl;
     //	    m_fitobjects[0]->print();

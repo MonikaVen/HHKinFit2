@@ -19,6 +19,7 @@ HHKinFit2::HHFitConstraintEHardM::getChi2() const{
   catch(HHEnergyRangeException const& e){
     m_fitobject->print();
     new4momentum2->print();
+    std::cout<<"over here!"<<std::endl;
     throw(HHInvMConstraintException(e.what()));
   }
   return(0);

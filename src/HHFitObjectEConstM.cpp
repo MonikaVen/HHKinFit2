@@ -79,7 +79,8 @@ HHKinFit2::HHFitObjectEConstM::changeE(double E) const{
 
   if((E<this->getLowerFitLimitE())||(E>this->getUpperFitLimitE())){
     std::stringstream msg;
-    msg << "target energy is out of limits: "<<"E(set)="<<E<<" "<<"E(limits)=["<<this->getLowerFitLimitE()<<","<< this->getUpperFitLimitE() << "]";
+    msg << "HHFitObjectEConstM: target energy is out of limits "<<"E(set)="<<E<<" "
+	<<"E(limits)=["<<this->getLowerFitLimitE()<<","<< this->getUpperFitLimitE() << "]";
     throw(HHEnergyRangeException(msg.str()));
   }
 
